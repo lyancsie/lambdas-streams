@@ -2,6 +2,8 @@ package Exercise10;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Main {
   
@@ -10,7 +12,7 @@ public class Main {
     Fox fox1 = new Fox("Fox1", "green", 25);
     Fox fox2 = new Fox("Fox2", "yellow", 2);
     Fox fox3 = new Fox("Fox3", "green", 3);
-    Fox fox4 = new Fox("Fox4", "green", 12);
+    Fox fox4 = new Fox("Fox4", "reddish", 12);
     Fox fox5 = new Fox("Fox5", "green", 2);
     
     foxes.add(fox1);
@@ -33,12 +35,15 @@ public class Main {
         .map(Fox::getName)
         .forEach(System.out::println);
     
-/*    System.out.println("Frequency of foxes by colour: ");
+   /*
     Map<String, Integer> freq = new HashMap<>();
     foxes.stream()
         .map(Fox::getColor)
         .forEach();
   }*/
-  
+    Map<String, Long> freq = foxes.stream()
+        .collect(Collectors.groupingBy(Fox::getColor, Collectors.counting()));
+    System.out.println("Frequency of foxes by colour: " + freq);
+    
   }
 }
